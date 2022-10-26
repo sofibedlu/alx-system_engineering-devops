@@ -1,0 +1,3 @@
+#!/bin/bash
+find . -type d -empty -execdir echo {} ';'
+find . -type f -empty -execdir echo {} ';'
