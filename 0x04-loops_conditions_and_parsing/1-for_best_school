@@ -1,9 +1,8 @@
 #!/usr/bin/env bash
 # this script displaying "Best School" 10 times in stdout
 
-END=10
 
-for i in $(seq $END)
+for ((i = 1; i <= 10; i++))
 do
 	echo "Best School"
 done
