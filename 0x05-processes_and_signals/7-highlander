@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+# displays "To infinity and beyond" indefinitely with sleep 2 in between
+#+ each itreration and "I am invincible!!!" when recieving SIGTERM signal
+
+handler(){
+	echo "I am invincible!!!"
+}
+
+trap handler SIGTERM
+
+while true
+do
+	echo "To infinity and beyond"
+	sleep 2
+done
