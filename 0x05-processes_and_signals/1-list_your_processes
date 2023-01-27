@@ -4,4 +4,4 @@
 #+ display in user-oriented format
 #+ show process hierarchy
 
-ps aux
+ps auxf
