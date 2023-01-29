@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+# script that groups visitors by IP and HTTP status code, and in list format
+#+ with the format OCCURENCE_NUMBER IP HTTP_CODE in reverse order based on occurence number
+
+awk '{ip[$1]++; status[$1] = $9} END {for (i in ip) print ip[i] " " i " " status[i]}' apache-access.log | sort -nr
