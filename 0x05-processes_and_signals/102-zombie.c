@@ -41,6 +41,7 @@ int main(void)
 		}
 	}
 	infinite_while();
-	while ((wpid = wait(&status)) > 0);
+	while ((wpid = wait(&status)) > 0)
+		;
 	return (0);
 }
