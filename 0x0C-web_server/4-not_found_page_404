@@ -1,0 +1,27 @@
+#!/usr/bin/env bash
+#install and configure the Ngnix web server, customize error page
+
+sudo apt-get update
+sudo apt-get -y install nginx
+sudo echo "Hello World!" | sudo tee /var/www/html/index.html
+sudo echo "Ceci n'est pas une page" | sudo tee /var/www/html/404.html
+
+SERVER_CONFIG=\
+"server {
+	listen 80 default_server;
+	listen [::]:80 default_server;
+	root /var/www/html;
+        error_page 404 /404.html;
+	index index.html index.htm index.nginx-debian.html;
+	server_name _;
+	if (\$request_filename ~ redirect_me){
+		rewrite ^ https://sketchfab.com/bluepeno/models permanent;
+	}
+	location / {
+		try_files \$uri \$uri/ =404;
+	}
+}"
+
+sudo bash -c "echo -e '$SERVER_CONFIG' | sudo tee /etc/nginx/sites-enabled/default"
+
+sudo service nginx restart
