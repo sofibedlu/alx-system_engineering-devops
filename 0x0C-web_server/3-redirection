@@ -1,10 +1,8 @@
 #!/usr/bin/env bash
 #install and configure the Ngnix web server
-
 sudo apt-get update
 sudo apt-get -y install nginx
 sudo echo "Hello World!" | sudo tee /var/www/html/index.html
-
 SERVER_CONFIG=\
 "server {
 	listen 80 default_server;
@@ -19,5 +17,4 @@ SERVER_CONFIG=\
 }"
 
 sudo bash -c "echo -e '$SERVER_CONFIG' | sudo tee /etc/nginx/sites-enabled/default"
-
 sudo service nginx restart
