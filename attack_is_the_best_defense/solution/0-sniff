@@ -1,0 +1,9 @@
+in terminal 1:
+	listen: sudo tcpdump -X -i enp0s3 host smtp.sendgrid.net
+in terminal 2:
+	run: user_authenticating_into_server script
+then analyze packet:
+decode base64 encoded strings from the packet using python:
+	import base64
+	pwd = base64.b64decode("bXlwYXNzd29yZDk4OTgh")
+	pwd = pwd.decode('utf-8') 

