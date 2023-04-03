@@ -6,8 +6,9 @@ path    => '/usr/bin',
 }
 
 package { 'nginx':
-ensure   => installed,
-provider => 'apt-get',
+ensure          => installed,
+provider        => 'apt-get',
+install_options => '-y',
 }
 
 exec { 'update header':
