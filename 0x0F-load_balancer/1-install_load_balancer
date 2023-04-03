@@ -2,7 +2,7 @@
 #install and configure HAproxy on lb-01 server
 
 sudo apt-get update
-sudo apt-get install haproxy
+sudo apt-get -y install haproxy
 
 new="\
 backend backend_servers\n\
