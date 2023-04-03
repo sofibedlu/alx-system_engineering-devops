@@ -12,7 +12,7 @@ install_options => '-y',
 }
 
 exec { 'update header':
-command => 'sed -i "s|http {|http {\n\tadd_header X-Served-By $hostname;|" /etc/nginx/nginx.conf',
+command => 'sudo sed -i "s|http {|http {\n\tadd_header X-Served-By $hostname;|" /etc/nginx/nginx.conf',
 path    => '/usr/bin',
 }
 
