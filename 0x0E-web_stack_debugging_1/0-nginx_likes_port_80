@@ -1,4 +1,7 @@
 #!/usr/bin/env bash
 #configure ngnix server to listen on port 80 after installation
 
-service nginx start
+if ! pgrep nginx > /dev/null
+then
+	service nginx start
+fi
