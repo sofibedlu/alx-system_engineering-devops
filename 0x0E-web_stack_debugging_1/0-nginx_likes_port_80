@@ -1,7 +1,13 @@
 #!/usr/bin/env bash
 #configure ngnix server to listen on port 80 after installation
 
-if ! pgrep nginx > /dev/null
+link="/etc/nginx/sites-enabled/default"
+target="/etc/nginx/sites-available/default"
+if [ -e "$link" ] && [ -L "$link" ]
 then
-	service nginx start
+        sudo rm $link
+        sudo ln -s $target $link
+else
+        sudo ln -s $target $link
 fi
+sudo service nginx restart
