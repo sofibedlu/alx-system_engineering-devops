@@ -3,11 +3,6 @@
 
 link="/etc/nginx/sites-enabled/default"
 target="/etc/nginx/sites-available/default"
-if [ -e "$link" ] && [ -L "$link" ]
-then
-        sudo rm $link
-        sudo ln -s $target $link
-else
-        sudo ln -s $target $link
-fi
+sudo rm $link
+sudo ln -s $target $link
 sudo service nginx restart
