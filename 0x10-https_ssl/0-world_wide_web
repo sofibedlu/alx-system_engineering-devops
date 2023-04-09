@@ -1,0 +1,37 @@
+#!/usr/bin/env bash
+#configure and display the recods info of domain and subdomain name
+
+arg1="$1"
+num_arg=$#
+
+display ()
+{
+	if [ "$num_arg" -lt 2 ]; then
+		array=("www" "lb-01" "web-01" "web-02")
+		for item in "${array[@]}"; do
+
+			sub="$item.$1"
+			result=$(dig "$sub" | grep -A1 'ANSWER SECTION:' |\
+			 	tail -n1 | awk '{print $4 " " $5}')
+			record=$(echo "$result" | awk '{print $1}')
+			ips=$(echo "$result" | awk '{print $2}')
+			echo "The subdomain $item is a $record record and points to $ips"
+			done
+	else
+		sub="$2.$1"
+                result=$(dig "$sub" | grep -A1 'ANSWER SECTION:' |\
+                             tail -n1 | awk '{print $4 " " $5}')
+                record=$(echo "$result" | awk '{print $1}')
+                ips=$(echo "$result" | awk '{print $2}')
+                echo "The subdomain $2 is a $record record and points to $ips"
+
+	fi
+
+}
+
+if [ "$#" -eq 2 ]; then
+	arg2="$2"
+	display "$arg1" "$arg2"
+else
+	display "$arg1"
+fi
