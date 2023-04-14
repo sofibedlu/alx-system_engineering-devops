@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+#configure ngnix server to listen on port 80 after installation
+sudo rm /etc/nginx/sites-enabled/default
+sudo ln -s /etc/nginx/sites-available/default /etc/nginx/sites-enabled/default
+sudo service nginx restart
