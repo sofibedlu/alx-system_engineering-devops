@@ -14,6 +14,8 @@
 	grant replication slave on *.* to 'replica_user'@'%';
 	grant replication client on mysql.user to 'holberton_user'@'localhost'; -> for the checker to check replica_user have correct permissions.
 
+#make sure default port 3306 for mysql on web01 is allowed by firewall
+
 #Setup a Primary-Replica infrastructure using MySQL:
 	-add some directive to /etc/mysql/mysql.conf.d/mysqld.cnf
 	-web01:
