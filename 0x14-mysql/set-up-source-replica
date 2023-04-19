@@ -1,0 +1,53 @@
+#install mysql distribution 5.7.x on both server
+	from the instruction (check-googl-doc)
+#create mysql user called holberton_user with the required permission:
+	create user 'holberton_user'@'localhost' identified by 'projectcorrection280hbtn';
+	grant replication client on *.* to 'holberton_user'@'localhost';
+#In order for you to set up replication, you’ll need to have a database with at least one table and one row in your primary MySQL server (web-01) to replicate from:
+	create database tyrell_corp;
+	use tyrell_corp;
+	create table nexus6 (id INT, name varchar(256);
+	insert into nexus6 values (1, 'leon');
+	grant select on tyrell_corp.nexus6 to holberton_user;
+#Before you get started with your primary-replica synchronization, you need one more thing in place. On your primary MySQL server (web-01), create a new user for the replica server:
+	create user 'replica_user'@'%' identified by 'replica';
+	grant replication slave on *.* to 'replica_user'@'%';
+	grant replication client on mysql.user to 'holberton_user'@'localhost'; -> for the checker to check replica_user have correct permissions.
+
+#Setup a Primary-Replica infrastructure using MySQL:
+	-add some directive to /etc/mysql/mysql.conf.d/mysqld.cnf
+	-web01:
+		-comment out bind-address
+		-server-id	= 1
+		-binlog_do_db	= tyrell_corp
+		-log_bin        = /var/log/mysql/mysql-bin.log
+	service mysql restart
+        -web02:
+                -server-id      = 2
+                -log_bin        = /var/log/mysql/mysql-bin.log
+		-binlog_do_db   = tyrell_corp
+		-relay-log      = /var/log/mysql/mysql-relay-bin.log
+	service mysql restart
+
+-Retrieving Binary Log Coordinates from the Source:
+	FLUSH TABLES WITH READ LOCK;
+	SHOW MASTER STATUS;
+		-record file and position value
+-If Your Source Have Any Existing Data to Migrate:
+	ssh ubuntu@35.174.209.16 -web01
+	sudo mysqldump -u root tyrell_corp > tyrell_corp.sql
+	UNLOCK TABLES;
+	exit
+#copy the dump to replica server:
+	scp tyrell_corp.sql ubuntu@35.153.226.72:/temp/
+#ssh to replica and create the database using the dump:
+	mysql -u root -p
+	create database tyrell_corp;
+	exit
+	sudo mysql tyrell_corp < /tmp/tyrell_corp.sql
+
+#starting and testing replica:
+	1)mysql -u root -p
+	2)STOP SLAVE;
+	3)CHANGE MASTER TO MASTER_HOST='35.174.209.16',MASTER_USER='replica_user', MASTER_PASSWORD='replica', MASTER_LOG_FILE='mysql-bin.000001', MASTER_LOG_POS=306;
+	4)START SLAVE;
