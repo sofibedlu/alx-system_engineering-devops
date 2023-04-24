@@ -3,6 +3,8 @@
     information about his/her TODO list progress.
     -script accept an integer as a parameter, which is the employee ID
     -export data in the CSV format
+    -Format: "USER_ID","USERNAME","TASK_COMPLETED_STATUS","TASK_TITLE"
+    -File name: USER_ID.csv
 """
 import csv
 import requests
