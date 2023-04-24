@@ -24,10 +24,10 @@ if __name__ == "__main__":
     data = []
     row = []
     for todo in res_todos.json():
-        row.append(f"{user_id}")
-        row.append(f"{user_name}")
-        row.append(f"{todo.get('completed')}")
-        row.append(f"{todo.get('title')}")
+        row.append("{}".format(user_id))
+        row.append("{}".format(user_name))
+        row.append("{}".format(todo.get('completed')))
+        row.append("{}".format(todo.get('title')))
         data.append(row)
         row = []
 
