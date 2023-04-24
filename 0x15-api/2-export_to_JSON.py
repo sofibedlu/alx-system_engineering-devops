@@ -31,7 +31,7 @@ if __name__ == "__main__":
         obj["username"] = user_name
         value.append(obj)
         obj = {}
-    dicts[f"{user_id}"] = value
+    dicts["{}".format(user_id)] = value
 
     file_name = '{}.json'.format(user_id)
     with open(file_name, 'w') as fil:
