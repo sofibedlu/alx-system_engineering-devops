@@ -41,7 +41,7 @@ if __name__ == "__main__":
             obj["completed"] = task.get('completed')
             value.append(obj)
             obj = {}
-        dicts[f"{user_id}"] = value
+        dicts["{}".format(user_id)] = value
         value = []
 
     file_name = 'todo_all_employees.json'
