@@ -2,7 +2,7 @@
 """ Python script that, uses REST API, for a given employee ID, returns
     information about his/her TODO list progress.
     -script accept an integer as a parameter, which is the employee ID
-    -export data in the CSV format
+    -export data in the JSON format
     -Records all tasks from all employees
     -Format: { "USER_ID": [ {"username": "USERNAME", "task":
     "TASK_TITLE", "completed": TASK_COMPLETED_STATUS}, {"username": "USERNAME",
