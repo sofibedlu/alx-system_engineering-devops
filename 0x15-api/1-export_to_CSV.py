@@ -28,7 +28,7 @@ if __name__ == "__main__":
         row = []
 
     file_name = "{}.csv".format(user_id)
-    with open(file_name, 'w', newline='') as f:
-        writer = csv.writer(f, quoting=csv.QUOTE_ALL)
+    with open(file_name, 'w', newline='') as file:
+        writer = csv.writer(file, quoting=csv.QUOTE_ALL)
         for row in data:
             writer.writerow(row)
