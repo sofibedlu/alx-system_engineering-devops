@@ -1,0 +1,13 @@
+#!/bin/bash
+
+# Find the Gunicorn master process ID
+PID=$(pgrep -f "gunicorn")
+
+# Check if Gunicorn is running
+if [ -n "$PID" ]; then
+    echo "Reloading Gunicorn gracefully..."
+    kill -HUP "$PID"
+    echo "Gunicorn reloaded successfully."
+else
+    echo "Gunicorn is not running!"
+fi
